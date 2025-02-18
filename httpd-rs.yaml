@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata: 
+  name: httpd-rs
+  labels:
+    app: httpd
+    env: dev
+spec:
+  minReadySeconds: 5
+  replicas: 5
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - httpd
+          - apache
+      - key: env
+        operator: Exists   
+  template:
+    metadata:
+      labels:
+        app: httpd
+        version: v1
+        env: dev
+    spec:  
+      containers:
+        - name: web2
+          image: httpd
+          resources:
+            limits:
+              cpu: 250m
+              memory: 64M
+          ports:
+            - containerPort: 80
