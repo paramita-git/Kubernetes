@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: agent-dm
+  labels:
+    env: dev
+    proj: monitor
+    mon: cpu
+spec:
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      env: dev
+      proj: monitor
+  template:
+    metadata:
+      labels:
+        env: dev
+        proj: monitor 
+    spec:
+      containers:
+      - name: agent-dm
+        image: nginx:alpine
+        command:
+        - sleep
+        - 1d
