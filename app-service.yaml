@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: app-svc
+  labels:
+   sub: medical-app
+spec:
+  type: LoadBalancer
+  selector:
+    sub: medical
+    env: dev
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP

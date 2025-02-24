@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx:alpine
+          image: apache:latest
           ports:
           - containerPort: 80    
 ---

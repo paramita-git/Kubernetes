@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: medical-app
+  labels:
+   sub: medical
+spec:
+  minReadySeconds: 5
+  replicas: 4
+  selector:
+    matchLabels:
+      sub: medical
+      env: dev
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:    
+    metadata:
+      labels:
+        sub: medical
+        env: dev
+    spec:
+      containers:
+      - name: medical-app
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources:    
+          limits: 
+            memory: 128M
+            cpu: 250m
