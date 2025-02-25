@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-pod-cm
+spec:
+  containers:
+  - name: web-pod-cm
+    image: alpine
+    command:
+    - sleep
+    - 1d
+    envFrom:
+     - configMapRef:
+        name: web-cm  
